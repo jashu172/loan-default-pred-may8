@@ -2,7 +2,33 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("dataset/credit_risk_dataset.csv")
+# df = pd.read_csv("dataset/credit_risk_dataset.csv")
+
+###################### DVC Related code START ##############################
+
+import os
+
+import dvc.api
+import pandas as pd
+
+# Repo:  'https://<github-username>:<github-token>@github.com/yograjm/credit-risk-data'
+
+repo_name = "loan-data-repo"     # Change as per your GitHub repository name
+repo_url = 'https://' + os.environ['GH_USERNAME'] + ':' + os.environ['GH_ACCESS_TOKEN'] + '@github.com/' + os.environ['GH_USERNAME'] + '/' + repo_name
+
+
+data_revision = 'v1.1'
+
+# Configurations to access remote storage
+remote_config = {
+    'access_key_id': os.environ["AWS_ACCESS_KEY_ID"],
+    'secret_access_key': os.environ["A" \
+    "WS_SECRET_ACCESS_KEY"],
+}
+
+with dvc.api.open('data/credit_risk_dataset.csv', repo=repo_url, rev=data_revision, remote_config=remote_config) as file:
+    df = pd.read_csv(file)
+###################### DVC Related code END ##############################
 
 #handle missing values
 df['loan_int_rate'] = df['loan_int_rate'].fillna(df['loan_int_rate'].mean())

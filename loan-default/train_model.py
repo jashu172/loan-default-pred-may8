@@ -45,3 +45,5 @@ joblib.dump(rf_model, 'trained_model/rf_model_loan_default_pred.pkl')
 # Save Label Encoder
 
 joblib.dump(loan_intent_encoder, 'trained_model/loan_intent_encoder.pkl')
+
+############## MLFLow code start #######################

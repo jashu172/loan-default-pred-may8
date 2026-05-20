@@ -49,4 +49,4 @@ iface = gr.Interface(fn=predict_loan_status,
                      title="Loan Default Prediction")
 
 if __name__ == "__main__":
-    iface.launch(debug=True)
+    iface.launch(server_name="0.0.0.0", server_port=7860)
